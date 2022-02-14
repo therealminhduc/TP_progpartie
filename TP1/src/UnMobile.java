@@ -1,15 +1,13 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class UnMobile extends JPanel implements Runnable, ActionListener
+public class UnMobile extends JPanel implements Runnable
 {
     int saLargeur, saHauteur, sonDebDessin;
     final int sonPas = 10, sonTemps=50, sonCote=40;
-
-    String[] titresBoutons = {"On", "Off"};
-    JButton[] boutons = new JButton[titresBoutons.length];
     JPanel panelSud = new JPanel ();
 
     UnMobile(int telleLargeur, int telleHauteur)
@@ -17,36 +15,26 @@ public class UnMobile extends JPanel implements Runnable, ActionListener
         super();
         saLargeur = telleLargeur;
         saHauteur = telleHauteur;
-        setSize(telleLargeur, telleHauteur);
-
-        setLayout (new BorderLayout (10,10));
-
-        for(int iTitre = 0; iTitre < titresBoutons.length; iTitre++) {
-            boutons[iTitre] = new JButton(titresBoutons[iTitre]);
-            boutons[iTitre].addActionListener(this);
-            panelSud.add(boutons[iTitre]);
-        }
-
-        add(panelSud, BorderLayout.SOUTH);
-        setBackground (new Color (128,128,128));
-
+        setSize(telleLargeur, telleHauteur);    
     }
 
     public void run()
     {
-        for (sonDebDessin=0; sonDebDessin < saLargeur - sonPas; sonDebDessin += sonPas)
-        {
-            repaint();
-            try{Thread.sleep(sonTemps);}
-            catch (InterruptedException telleExcp)
-            {telleExcp.printStackTrace();}
-        }
-        for(sonDebDessin=saLargeur; sonDebDessin < saLargeur + sonPas; sonDebDessin -= sonPas){
-            repaint();
-            try{Thread.sleep(sonTemps);}
-            catch (InterruptedException telleExcp)
-            {telleExcp.printStackTrace();}
-        }
+    	for(int i=0; i<3; i++){
+    		for (sonDebDessin=0; sonDebDessin < (UneFenetre.LARG-sonCote) - sonPas; sonDebDessin+= sonPas)
+	        {
+	            repaint();
+	            try{Thread.sleep(sonTemps);}
+	            catch (InterruptedException telleExcp)
+	            {telleExcp.printStackTrace();}
+	        }
+	        for(sonDebDessin=UneFenetre.LARG - sonCote; sonDebDessin > 0; sonDebDessin-= sonPas){
+	            repaint();
+	            try{Thread.sleep(sonTemps);}
+	            catch (InterruptedException telleExcp)
+	            {telleExcp.printStackTrace();}
+	        }
+	    }	
     }
 
     public void paintComponent(Graphics telCG)
@@ -54,9 +42,5 @@ public class UnMobile extends JPanel implements Runnable, ActionListener
         super.paintComponent(telCG);
         telCG.fillRect(sonDebDessin, saHauteur/2, sonCote, sonCote);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    
 }
