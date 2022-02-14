@@ -39,7 +39,7 @@ class UneFenetre extends JFrame implements ActionListener
         
         Container leConteneur = getContentPane();
     	leConteneur.setLayout(new GridLayout(2,2));
-    	leConteneur.setSize(1000, 500);
+    	leConteneur.setSize(LARG, HAUT);
     	leConteneur.setVisible(true);
     	
         sonMobile1 = new UnMobile(LARG,HAUT);

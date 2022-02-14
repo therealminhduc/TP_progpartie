@@ -15,10 +15,9 @@ class UneFenetre extends JFrame implements ActionListener
 	JButton sonBouton1;
 	JButton sonBouton2;
 	
-	//JPanel panelEast = new JPanel ();
+	JPanel panelEast = new JPanel ();
 	
 	Thread laTache1;
-	Thread laTache2;
 	
 	Boolean state = true;
 
@@ -30,17 +29,9 @@ class UneFenetre extends JFrame implements ActionListener
         // creer une thread laThread avec sonMobile
         // afficher la fenetre
         // lancer laThread 
-       
-        laTache1 = new Thread (sonMobile1);
-        laTache1.start();
-        
-        laTache2 = new Thread (sonMobile2);
-        laTache2.start();
-        
-        Container leConteneur = getContentPane();
+    	
+    	Container leConteneur = getContentPane();
     	leConteneur.setLayout(new GridLayout(2,2));
-    	leConteneur.setSize(1000, 500);
-    	leConteneur.setVisible(true);
     	
         sonMobile1 = new UnMobile(LARG,HAUT);
         sonBouton1 = new JButton("ON/OFF");
@@ -53,8 +44,12 @@ class UneFenetre extends JFrame implements ActionListener
         sonBouton2.addActionListener(this);
         leConteneur.add(sonBouton2);
         leConteneur.add(sonMobile2);
+        
+        
+        laTache1 = new Thread (sonMobile1);
+        laTache1.start();
 
-        /*
+        
         setContentPane (sonMobile1);
         
         setBackground (new Color (230,128,255));
@@ -68,34 +63,20 @@ class UneFenetre extends JFrame implements ActionListener
         panelEast.add(sonBouton1);    
 
         add(panelEast, BorderLayout.SOUTH);
-        setBackground (new Color (128,128,128));*/
+        setBackground (new Color (128,128,128));
     }
         
         public void actionPerformed (ActionEvent e){ // (3)
         	
             if (e.getSource () == sonBouton1) {
                 if(state == true) {
-                    laTache1.suspend();
+                    laTache.suspend();
                     System.out.println("OFF");
                     state = false;
                 }
                 
                 else {
-                    laTache1.resume();
-                    System.out.println("ON");
-                    state = true;
-                }
-            }
-            
-            if (e.getSource () == sonBouton2) {
-                if(state == true) {
-                    laTache2.suspend();
-                    System.out.println("OFF");
-                    state = false;
-                }
-                
-                else {
-                    laTache2.resume();
+                    laTache.resume();
                     System.out.println("ON");
                     state = true;
                 }

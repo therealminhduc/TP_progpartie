@@ -30,19 +30,13 @@ class UneFenetre extends JFrame implements ActionListener
         // creer une thread laThread avec sonMobile
         // afficher la fenetre
         // lancer laThread 
-       
-        laTache1 = new Thread (sonMobile1);
-        laTache1.start();
-        
-        laTache2 = new Thread (sonMobile2);
-        laTache2.start();
-        
-        Container leConteneur = getContentPane();
+    	
+    	Container leConteneur = getContentPane();
     	leConteneur.setLayout(new GridLayout(2,2));
-    	leConteneur.setSize(1000, 500);
+    	leConteneur.setSize(LARG, HAUT);
     	leConteneur.setVisible(true);
     	
-        sonMobile1 = new UnMobile(LARG,HAUT);
+        sonMobile1 = new UnMobile(LARG,500);
         sonBouton1 = new JButton("ON/OFF");
         sonBouton1.addActionListener(this);
         leConteneur.add(sonBouton1);
@@ -53,6 +47,13 @@ class UneFenetre extends JFrame implements ActionListener
         sonBouton2.addActionListener(this);
         leConteneur.add(sonBouton2);
         leConteneur.add(sonMobile2);
+        
+        
+        laTache1 = new Thread (sonMobile1);
+        laTache1.start();
+        
+        laTache2 = new Thread (sonMobile2);
+        laTache2.start();
 
         /*
         setContentPane (sonMobile1);

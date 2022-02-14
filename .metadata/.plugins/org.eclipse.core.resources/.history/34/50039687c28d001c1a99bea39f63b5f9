@@ -15,10 +15,9 @@ class UneFenetre extends JFrame implements ActionListener
 	JButton sonBouton1;
 	JButton sonBouton2;
 	
-	//JPanel panelEast = new JPanel ();
+	JPanel panelEast = new JPanel ();
 	
 	Thread laTache1;
-	Thread laTache2;
 	
 	Boolean state = true;
 
@@ -30,16 +29,10 @@ class UneFenetre extends JFrame implements ActionListener
         // creer une thread laThread avec sonMobile
         // afficher la fenetre
         // lancer laThread 
-       
-        laTache1 = new Thread (sonMobile1);
-        laTache1.start();
-        
-        laTache2 = new Thread (sonMobile2);
-        laTache2.start();
-        
-        Container leConteneur = getContentPane();
+    	
+    	Container leConteneur = getContentPane();
     	leConteneur.setLayout(new GridLayout(2,2));
-    	leConteneur.setSize(1000, 500);
+    	leConteneur.setSize(LARG, HAUT);
     	leConteneur.setVisible(true);
     	
         sonMobile1 = new UnMobile(LARG,HAUT);
@@ -53,6 +46,10 @@ class UneFenetre extends JFrame implements ActionListener
         sonBouton2.addActionListener(this);
         leConteneur.add(sonBouton2);
         leConteneur.add(sonMobile2);
+        
+        
+        laTache1 = new Thread (sonMobile1);
+        laTache1.start();
 
         /*
         setContentPane (sonMobile1);
@@ -82,20 +79,6 @@ class UneFenetre extends JFrame implements ActionListener
                 
                 else {
                     laTache1.resume();
-                    System.out.println("ON");
-                    state = true;
-                }
-            }
-            
-            if (e.getSource () == sonBouton2) {
-                if(state == true) {
-                    laTache2.suspend();
-                    System.out.println("OFF");
-                    state = false;
-                }
-                
-                else {
-                    laTache2.resume();
                     System.out.println("ON");
                     state = true;
                 }
